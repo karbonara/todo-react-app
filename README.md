@@ -1,6 +1,6 @@
 ToDoApp - https://karbonara.github.io/todo-react-app/
 
 Стэк приложения: 
-ReactJS (useState, useReducer, useEffect)
+ReactJS (useState, useEffect)
 React Router
 Axios
