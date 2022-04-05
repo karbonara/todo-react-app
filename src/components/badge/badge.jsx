@@ -3,12 +3,14 @@ import classNames from 'classnames';
 
 import './badge.scss';
 
-function Badge({ color }) {
+function Badge({ color, onClick, className }) {
     return (
         <>
             <i
-                className={classNames('badge', { [`badge--${color}`]: color }, classNames)}
-            ></i>
+                className={classNames('badge', { [`badge--${color}`]: color }, className)}
+                onClick={onClick}
+            >
+            </i>
         </>
     );
 }

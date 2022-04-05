@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './list.scss';
 import removeSvg from '../../assets/img/remove.svg';
 import classNames from 'classnames';

@@ -7,6 +7,7 @@ import Badge from '../badge/badge';
 function AddButtonList({ colors }) {
 
     const [visiblePopup, setVisiblePopup] = useState(false);
+    const [selectedColor, selectColor] = useState(colors[0].id);
 
     const handleOpenPopup = () => {
         setVisiblePopup(true);
@@ -48,19 +49,18 @@ function AddButtonList({ colors }) {
                         onClick={handleClosePopup}
                         src={closePopup}
                     />
-
                     <input
                         className="field"
                         type="text"
                         placeholder="Название списка"
                     />
-
                     <div className="add-list__popup-colors">
                         {colors.map(color => (
                             <Badge
                                 key={color.id}
                                 color={color.name}
-                                className='active'
+                                className={selectedColor === color.id && 'active'}
+                                onClick={() => selectColor(color.id)}
                             />
                         ))}
                     </div>
