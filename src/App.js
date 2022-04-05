@@ -1,5 +1,7 @@
 import './App.css';
+import AddButtonList from './components/add-button-list/add-button-list';
 import List from './components/list/list';
+import DB from './assets/db.json';
 
 function App() {
   return (
@@ -25,20 +27,24 @@ function App() {
             active: true,
           }
         ]} />
-        <List items={[
-          {
-            color: 'green',
-            name: 'Покупки',
-          },
-          {
-            color: 'blue',
-            name: 'Фронтенд',
-          },
-          {
-            color: 'green',
-            name: 'ФИльмы и сериалы',
-          }
-        ]} />
+        <List
+          items={[
+            {
+              color: 'green',
+              name: 'Покупки',
+            },
+            {
+              color: 'blue',
+              name: 'Фронтенд',
+            },
+            {
+              color: 'green',
+              name: 'ФИльмы и сериалы',
+            }
+          ]}
+          isRemovable={true}
+        />
+        <AddButtonList colors={DB.colors} />
       </div>
       <div className='todo__tasks'>TEST</div>
     </div>
