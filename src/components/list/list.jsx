@@ -3,8 +3,14 @@ import './list.scss';
 import removeSvg from '../../assets/img/remove.svg';
 import classNames from 'classnames';
 
-function List({ items, isRemovable, handleOpenPopup }) {
+function List({ items, isRemovable, handleOpenPopup, onRemove }) {
 
+    const [remove, setRemove] = useState(true);
+
+    const removeList = (item) => {
+        onRemove(item)
+        setRemove(false)
+    }
     return (
         <ul className="list">
             {items.map((item) => (
@@ -19,6 +25,7 @@ function List({ items, isRemovable, handleOpenPopup }) {
                         className="list__remove-icon"
                         src={removeSvg}
                         alt="Remove icon"
+                        onClick={() => removeList(item)}
                     />
                 </li>
             ))}

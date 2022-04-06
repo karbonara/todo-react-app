@@ -4,16 +4,32 @@ import './add-button-list.scss';
 import closePopup from '../../assets/img/close-popup.svg';
 import Badge from '../badge/badge';
 
-function AddButtonList({ colors }) {
+function AddButtonList({ colors, onAdd }) {
 
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [selectedColor, selectColor] = useState(colors[0].id);
+    const [inputValue, setInputValue] = useState('');
 
+    const addList = () => {
+        if (!inputValue) {
+            alert('Введите название списка!');
+            return;
+        }
+        const color = colors.filter(c => c.id === selectedColor)[0].name;
+        onAdd({ id: 1, name: inputValue, color: color });
+        setInputValue('');
+        setVisiblePopup(false);
+    };
     const handleOpenPopup = () => {
         setVisiblePopup(true);
     };
     const handleClosePopup = () => {
         setVisiblePopup(false);
+        setInputValue('');
+        selectColor(colors[0].id);
+    };
+    const handleValue = (evt) => {
+        setInputValue(evt.target.value);
     };
 
     return (
@@ -53,6 +69,8 @@ function AddButtonList({ colors }) {
                         className="field"
                         type="text"
                         placeholder="Название списка"
+                        value={inputValue}
+                        onChange={handleValue}
                     />
                     <div className="add-list__popup-colors">
                         {colors.map(color => (
@@ -64,7 +82,7 @@ function AddButtonList({ colors }) {
                             />
                         ))}
                     </div>
-                    <button className="button">
+                    <button onClick={addList} className="button">
                         Добавить
                     </button>
                 </div>
