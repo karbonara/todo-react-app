@@ -20,6 +20,14 @@ function App() {
     ];
     setLists(newList)
   };
+  const onAddTask = (listId, taskObj) => {
+    // const newList = [
+    //   ...lists,
+    //   taskObj
+    // ];
+    // setLists(newList)
+    console.log(listId, taskObj);
+  };
 
   return (
     <div className='todo'>
@@ -52,7 +60,7 @@ function App() {
         <AddButtonList onAdd={onAddList} colors={DB.colors} />
       </div>
       <div className='todo__tasks'>
-        <Tasks />
+        <Tasks list={lists} onAddTask={onAddTask} />
       </div>
     </div>
   );
