@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import List from '../list/list';
 import './add-button-list.scss';
 import closePopup from '../../assets/img/close-popup.svg';
 import Badge from '../badge/badge';
+import axios from 'axios';
 
 function AddButtonList({ colors, onAdd }) {
 
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [selectedColor, selectColor] = useState(colors[0].id);
+    const [selectedColor, selectColor] = useState(3);
     const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+        if (Array.isArray(colors)) {
+            selectColor(colors[0].id);
+        }
+    }, [colors]);
 
     const addList = () => {
         if (!inputValue) {
@@ -16,9 +23,16 @@ function AddButtonList({ colors, onAdd }) {
             return;
         }
         const color = colors.filter(c => c.id === selectedColor)[0].name;
-        onAdd({ id: 1, name: inputValue, color: color });
-        setInputValue('');
-        setVisiblePopup(false);
+        axios.post('http://localhost:3000/lists', {
+            name: inputValue,
+            colorId: selectedColor
+        })
+            .then(({ data }) => {
+                const listObj = { ...data, color: { name: color } };
+                onAdd(listObj);
+                setInputValue('');
+                setVisiblePopup(false);
+            });
     };
     const handleOpenPopup = () => {
         setVisiblePopup(true);
